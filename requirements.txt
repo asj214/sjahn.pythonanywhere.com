@@ -11,6 +11,7 @@ Flask==1.1.2
 flask-apispec==0.8.8
 Flask-JWT-Extended==3.24.1
 flask-orator==0.2.0
+flask-request-validator==2.1.2
 Flask-WTF==0.14.3
 importlib-metadata==1.6.0
 inflection==0.3.1
