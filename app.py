@@ -44,6 +44,9 @@ if bool(os.getenv('IS_DEV')):
 
     logger.addHandler(handler)
 
+from api import users
+
+app.register_blueprint(users.blueprint, url_prefix='/api/user')
 
 @app.route('/')
 def index():
