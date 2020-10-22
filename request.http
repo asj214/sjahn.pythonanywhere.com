@@ -2,6 +2,18 @@
 
 
 ###
+# api/user
+POST {{base_url}}/api/user/
+Content-Type: application/json
+
+{
+    "email": "ahnsb214@gmail.com",
+    "name": "sjahn",
+    "password": "1234"
+}
+
+
+###
 # api/v1/auth/login
 # @name login
 POST {{base_url}}/api/user/login
@@ -12,4 +24,16 @@ Content-Type: application/json
     "password": "1234"
 }
 
-# @access_token = {{login.response.body.access_token}}
+###
+@access_token = {{login.response.body.access_token}}
+
+
+###
+# api/auth/me
+GET {{base_url}}/api/user/
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+
+}

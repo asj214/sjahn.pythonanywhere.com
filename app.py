@@ -2,8 +2,10 @@ import os
 import logging
 from flask import Flask
 from flask_orator import Orator
+from flasgger import Swagger
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
+from api_docs import template
 
 
 load_dotenv(verbose=True)
@@ -26,9 +28,15 @@ app.config['ORATOR_DATABASES'] = {
 
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')  # Change this!
 app.config['JWT_TOKEN_LOCATION'] = ['headers'] # headers', 'cookies', 'query_string', 'json'
+app.config['SWAGGER'] = {
+    'title': 'sjahn.pythonanywhere.com',
+    'uiversion': 3,
+    'openapi': '3.0.2'
+}
 
 db = Orator(app)
 jwt = JWTManager(app)
+Swagger(app, template=template)
 
 if bool(os.getenv('IS_DEV')):
 
