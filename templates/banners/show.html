@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10 col-xs-12">
+        {% if banner.attachment.url %}
+        <img src="{{ banner.attachment.url }}" class="img-fluid" alt="Responsive image">
+        {% endif %}
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>카테고리</label>
+                    <input type="text" class="form-control" readonly value="{{ banner.category_id }}">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>작성자</label>
+                    <input type="text" class="form-control" readonly value="{{ banner.user.name }}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>제목</label>
+                    <input type="text" class="form-control" readonly value="{{ banner.subject }}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>설명</label>
+                    <textarea class="form-control" rows="3" readonly>{{ banner.description|replace('\n', '<br>'|safe) }}</textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>작성일</label>
+                    <input type="text" class="form-control" readonly value="{{ banner.created_at }}">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>수정일</label>
+                    <input type="text" class="form-control" readonly value="{{ banner.updated_at }}">
+                </div>
+            </div>
+        </form>
+        <div>
+            <a class="btn btn-secondary" href="{{ url_for('contents.banner_index') }}" role="button">목록</a>
+            <a class="btn btn-primary" href="{{ url_for('contents.banner_edit', pk=banner.id) }}" role="button">수정</a>
+            <div class="float-right">
+                <button 
+                    type="button" 
+                    class="btn btn-danger btn-destroy" 
+                    data-destroy_url="{{ url_for('contents.banner_destroy', pk=banner.id) }}"
+                    data-redirect_url="{{ url_for('contents.banner_index') }}">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

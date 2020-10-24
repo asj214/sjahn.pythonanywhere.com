@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% block content %}
+<style>
+.media-banner-image { width: 260px; height: 150px; }
+</style>
+<div class="row justify-content-center">
+    <div class="col-md-12 col-xs-12">
+        <h3 class="mb-3">Banners</h3>
+        <div class="d-flex justify-content-end">
+            <div class="pb-2 bd-highlight">
+                <a href="{{ url_for('contents.banner_create') }}" class="btn btn-outline-primary">Write</a>
+            </div>
+        </div>
+        <div>
+            <ul class="list-unstyled">
+                {% for banner in banners %}
+                <li class="media my-4">
+                    {% if banner.attachment.url %}
+                    <img src="{{ banner.attachment.url }}" class="mr-3 media-banner-image" />
+                    {% else %}
+                    <img src="https://via.placeholder.com/260x150" class="mr-3 media-banner-image" />
+                    {% endif %}
+                    <div class="media-body">
+                        <a href="{{ url_for('contents.banner_show', pk=banner.id) }}">
+                            <h5 class="mt-0 mb-1">{{ banner.subject }}</h5>
+                        </a>
+                        <p>{{ banner.description|replace('\n', '<br>'|safe) }}</p>
+                        {% if banner.link %}
+                        <p><span class="badge badge-info">link</span> {{ banner.link }}</p>
+                        {% endif %}
+                        <p class="mb-0">{{ banner.user.name }}&nbsp;<cite title="Source Title">{{ banner.created_at }}</cite></p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% for page in range(1, banners.last_page + 1) %}
+                {% if page == banners.current_page %}
+                <li class="page-item active">
+                    <a class="page-link" href="javascript:void(0);">{{ page }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('contents.banner_index', page=page) }}">{{ page }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+
+    </div>
+</div>
+{% endblock %}

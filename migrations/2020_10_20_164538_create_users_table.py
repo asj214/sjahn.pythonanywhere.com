@@ -17,7 +17,7 @@ class CreateUsersTable(Migration):
             table.timestamps()
             table.soft_deletes()
 
-            table.unique(['email', 'deleted_at'])
+            table.unique(['email'])
 
     def down(self):
         """

@@ -79,3 +79,41 @@ class PostsSchema(PostSchema):
     #     }
 
 
+class Attachment(Schema):
+    id = fields.Int()
+    user = fields.Nested(UserSchema)
+    attachment_id = fields.Int()
+    attachment_type = fields.Str()
+    url = fields.Str()
+
+    created_at = fields.DateTime()
+    updated_at = fields.DateTime()
+
+    class Meta:
+        fields = ("id", "user", "attachment_id", "attachment_type", "url", "attachment", "created_at", "updated_at")
+        ordered = True
+
+
+class BannerSchema(Schema):
+    id = fields.Int()
+    category_id = fields.Int()
+    user = fields.Nested(UserSchema)
+    subject = fields.Str()
+    link = fields.Str()
+    description = fields.Str()
+    attachment = fields.Nested(Attachment)
+
+    created_at = fields.DateTime()
+    updated_at = fields.DateTime()
+
+    class Meta:
+        fields = ("id", "category_id", "user", "subject", "link", "description", "attachment", "created_at", "updated_at")
+        ordered = True
+
+
+class BannersSchema(BannerSchema):
+
+    @post_dump
+    def dump_article(self, data, **kwargs):
+        data['user'] = data['user']
+        return data

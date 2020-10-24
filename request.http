@@ -37,3 +37,16 @@ Authorization: Bearer {{access_token}}
 {
 
 }
+
+
+###
+# api/banners
+GET {{base_url}}/api/banners  
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "category_id": 1,
+    "page": 1,
+    "per_page": 20
+}
