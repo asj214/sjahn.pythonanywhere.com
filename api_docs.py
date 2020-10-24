@@ -84,6 +84,45 @@ template = {
                 "summary": "로그인",
                 "tags": ["users"]
             }
+        },
+
+        "/api/banners": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 20,
+                            "example": 20
+                        }
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {"description": "OK"}
+                },
+                "summary": "배너 리스트",
+                "tags": ["banners"]
+            }
         }
 
     },

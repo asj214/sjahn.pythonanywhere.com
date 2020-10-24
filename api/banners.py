@@ -18,9 +18,9 @@ blueprint = Blueprint('banners', __name__)
 @marshal_with(BannersSchema(many=True))
 def index():
 
-    page = request.json.get('page', 1)
-    per_page = request.json.get('per_page', 20)
-    category_id = request.json.get('category_id', 1)
+    page = request.args.get('page', type=int, default=1)
+    per_page = request.args.get('per_page', type=int, default=20)
+    category_id = request.args.get('category_id', type=int, default=1)
 
     banners = Banner.where('category_id', category_id)
     banners = banners.with_('user', 'attachment').order_by('id', 'desc').paginate(per_page, page)
