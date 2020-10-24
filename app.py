@@ -7,8 +7,7 @@ from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 from api_docs import template
 
-
-load_dotenv(verbose=True)
+load_dotenv(os.path.join(os.path.expanduser('/Users/sjahn/workspace/sjahn.pythonanywhere.com'), '.env'))
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
