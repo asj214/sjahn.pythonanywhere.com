@@ -60,7 +60,7 @@ from web import (
 app.register_blueprint(auth.blueprint, url_prefix='/user')
 app.register_blueprint(users.blueprint, url_prefix='/api/user')
 
-app.register_blueprint(contents.blueprint, url_prefix='/contents')
+app.register_blueprint(contents.blueprint, url_prefix='/')
 app.register_blueprint(banners.blueprint, url_prefix='/api/banners')
 
 
