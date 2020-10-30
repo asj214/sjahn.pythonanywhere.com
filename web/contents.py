@@ -19,13 +19,13 @@ def banner_create():
     form = BannerForm()
     if form.validate_on_submit():
 
-        banner = Banner()
-        banner.category_id = form.category_id.data
-        banner.user_id = session['auth']['id']
-        banner.subject = form.subject.data
-        banner.link = form.link.data
-        banner.description = form.description.data
-        banner.save()
+        banner = Banner(
+            category_id=form.category_id.data,
+            user_id=session['auth']['id'],
+            subject=form.subject.data,
+            link=form.link.data,
+            description=form.description.data
+        )
 
         if form.attachment.data:
             now = datetime.now().strftime('%Y%m')
@@ -41,13 +41,13 @@ def banner_create():
             path = os.path.join(directory, save_filename)
             form.attachment.data.save(path)
 
-            attachment = Attachment()
-            attachment.attachment_type = 'banners'
-            attachment.attachment_id = banner.id
-            attachment.url = path.replace(UPLOAD_DIR, '')
-            attachment.user_id = session['auth']['id']
-            attachment.filename = form.attachment.data.filename
-            attachment.save()
+            Attachment(
+                attachment_type='banners',
+                attachment_id=banner.id,
+                url=path.replace(UPLOAD_DIR, ''),
+                user_id=session['auth']['id'],
+                filename=form.attachment.data.filename
+            )
         
         return redirect(url_for('contents.banner_index'))
 
