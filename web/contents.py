@@ -19,8 +19,6 @@ def banner_create():
     form = BannerForm()
     if form.validate_on_submit():
 
-        print(session['auth']['id'])
-
         banner = Banner.create(
             category_id=form.category_id.data,
             user_id=session['auth']['id'],
