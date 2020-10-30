@@ -19,7 +19,9 @@ def banner_create():
     form = BannerForm()
     if form.validate_on_submit():
 
-        banner = Banner(
+        print(session['auth']['id'])
+
+        banner = Banner.create(
             category_id=form.category_id.data,
             user_id=session['auth']['id'],
             subject=form.subject.data,
@@ -41,9 +43,9 @@ def banner_create():
             path = os.path.join(directory, save_filename)
             form.attachment.data.save(path)
 
-            Attachment(
-                attachment_type='banners',
+            Attachment.create(
                 attachment_id=banner.id,
+                attachment_type='banners',
                 url=path.replace(UPLOAD_DIR, ''),
                 user_id=session['auth']['id'],
                 filename=form.attachment.data.filename

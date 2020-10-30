@@ -13,7 +13,7 @@ class User(SoftDeletes, Model):
 
 class Banner(SoftDeletes, Model):
     __table__ = 'banners'
-    __fillable__ = ['subject', 'url', 'link', 'description']
+    __fillable__ = ['subject', 'user_id', 'url', 'link', 'description']
     __dates__ = ['deleted_at']
 
     @belongs_to('user_id', 'id')
@@ -27,6 +27,7 @@ class Banner(SoftDeletes, Model):
 
 class Attachment(SoftDeletes, Model):
     __table__ = 'attachments'
+    __fillable__ = ['attachment_type', 'attachment_id', 'user_id', 'url', 'filename']
     __dates__ = ['deleted_at']
 
     @belongs_to('user_id', 'id')
